@@ -10,7 +10,7 @@ class EzMail {
 	public function __construct() {
 	    $this->templates_dir = './templates/';
 	    $this->char = 'utf-8';
-	    $this->from = 'anomymous@anomymous.com'."¥n";
+	    $this->from = 'anomymous@anomymous.com'.PHP_EOL;
 	    $this->cc = null;
 	    $this->bcc = null;
 	}
