@@ -3,10 +3,16 @@ class EzMail {
     
 	//初期設定
 	private $templates_dir;
-	private $char;	
+	private $char;
+	private $from;	
+	private $cc;
+	private $bcc;
 	public function __construct() {
 	    $this->templates_dir = './templates/';
 	    $this->char = 'utf-8';
+	    $this->from = 'anomymous@anomymous.com'."¥n";
+	    $this->cc = null;
+	    $this->bcc = null;
 	}
 	
 	//テンプレートセット
@@ -36,11 +42,10 @@ class EzMail {
 		}
 	}
 
-	//From toセット
-	private $from;
+	//From to cc bccセット
 	public function setFrom($from = NULL) {
 		if(!is_null($from)) {
-			$this->from = "From : ".$from;
+			$this->from = "From: ".$from.PHP_EOL;
 		} else {
 			$this->from = NULL;
 		}
@@ -50,6 +55,30 @@ class EzMail {
 	public function setTo($to) {
 		$this->to = $to;
 		return $this->to;
+	}
+	
+	public function setcc($cc = array()) {
+	    if(!empty($cc)) {
+		if(is_array($cc)) {
+		    $this->cc = "Cc: ".rtrim(implode(',',$cc),',').PHP_EOL;
+		} else {
+		    $this->cc = "Cc: ".$cc.PHP_EOL;
+		}
+	    } else {
+		return null;
+	    }   
+	}
+	
+	public function setbcc($bcc = array()) {
+	    if(!empty($bcc)) {
+		if(is_array($bcc)) {
+		    $this->bcc = "Bcc: ".rtrim(implode(',',$bcc),',').PHP_EOL;
+		} else {
+		    $this->bcc = "Bcc: ".$bcc.PHP_EOL;
+		}
+	    } else {
+		return null;
+	    }
 	}
 
 	//文字コードセット
@@ -105,9 +134,11 @@ class EzMail {
 		$body = $this->__getTemplate();
 		$body = $this->__setassing($body);
 		$subject = $this->subject;
-		$from = $this->from;
+		$header = $this->from;
+		$header .= $this->cc;
+		$header .= $this->bcc;
 		$to = $this->to;
-		if(mb_send_mail($to,$subject,$body,$from)) {
+		if(mb_send_mail($to,$subject,$body,$header)) {
 			return true;
 		} else {
 			return false;

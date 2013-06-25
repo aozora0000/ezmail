@@ -25,6 +25,23 @@
 	//送信元設定
 	$mail->setFrom("from@hoge.com");
 	
+	//$cc $bcc is array or string
+	//文字列でも配列でも送信出来ます
+	$cc = array(
+	    "cc1@hoge.com",
+	    "cc2@hoge.com"
+	);
+	
+	$bcc = array(
+	    "bcc1@hoge.com",
+	    "bcc2@hoge.com"
+	);
+	
+	//set cc and bcc(default:null)
+	//cc bcc設定(デフォルト：null)
+	$mail->setcc($cc);
+	$mail->setbcc($bcc);
+	
 	//set to adrress
 	//送信先設定
 	$mail->setTo("to@hoge.com");
