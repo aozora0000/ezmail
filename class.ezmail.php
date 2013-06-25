@@ -57,7 +57,7 @@ class EzMail {
 		return $this->to;
 	}
 	
-	public function setcc($cc = array()) {
+	public function setCc($cc = array()) {
 	    if(!empty($cc)) {
 		if(is_array($cc)) {
 		    $this->cc = "Cc: ".rtrim(implode(',',$cc),',').PHP_EOL;
@@ -69,7 +69,7 @@ class EzMail {
 	    }   
 	}
 	
-	public function setbcc($bcc = array()) {
+	public function setBcc($bcc = array()) {
 	    if(!empty($bcc)) {
 		if(is_array($bcc)) {
 		    $this->bcc = "Bcc: ".rtrim(implode(',',$bcc),',').PHP_EOL;

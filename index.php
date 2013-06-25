@@ -39,8 +39,8 @@
 	
 	//set cc and bcc(default:null)
 	//cc bcc設定(デフォルト：null)
-	$mail->setcc($cc);
-	$mail->setbcc($bcc);
+	$mail->setCc($cc);
+	$mail->setBcc($bcc);
 	
 	//set to adrress
 	//送信先設定
