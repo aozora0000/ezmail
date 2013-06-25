@@ -1,7 +1,15 @@
 <?php
 class EzMail {
-	//テンプレートセット
+    
+	//初期設定
 	private $templates_dir;
+	private $char;	
+	public function __construct() {
+	    $this->templates_dir = './templates/';
+	    $this->char = 'utf-8';
+	}
+	
+	//テンプレートセット
 	public function setTempdir($templates_dir = NULL) {
 		if(!is_null($templates_dir)) {
 			$this->templates_dir = $templates_dir;
@@ -45,7 +53,6 @@ class EzMail {
 	}
 
 	//文字コードセット
-	private $char;
 	public function setChar($char = null) {
 		if(!is_null($char)) {
 			$this->char = $char;
